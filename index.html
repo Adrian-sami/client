@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuentro Financiero | Financial Strategy for Businesses & Individuals</title>
+    
+    <!-- Tailwind CSS (via CDN for standalone functionality) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            // New Color Palette based on T-Shirt Brief
+                            orange: '#FF6A00',       // Primary Orange
+                            orangeDark: '#E65C00',   // Shadow/Depth
+                            orangeLight: '#FF8A33',  // Highlight
+                            
+                            blue: '#0F3E66',         // Primary Blue
+                            blueDark: '#0A2E4D',     // Darker Shadow
+                            blueLight: '#2E6FA3',    // Highlight
+                            
+                            light: '#f8fafc',        // Background
+                            muted: '#64748b',        // Gray text
+                        }
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'marquee': 'marquee 25s linear infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { -webkit-font-smoothing: antialiased; }
+        
+        .text-gradient {
+            background: linear-gradient(to right, #FF6A00, #E65C00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .nav-link { position: relative; }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #FF6A00;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after { width: 100%; }
+    </style>
+</head>
+<body class="bg-brand-light text-brand-blue-dark font-sans overflow-x-hidden">
+
+    <!-- Navigation -->
+    <header id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+               <!-- Logo -->
+<div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+    <img 
+        src="images\Encuentro-Financiero-Logo-3.png" 
+        alt="Encuentro Financiero Logo" 
+        class="h-16 w-auto object-contain"
+    >
+</div>
+
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="#home" class="nav-link text-sm font-medium text-slate-600 hover:text-brand-blue transition-colors">Home</a>
+                    <a href="#services" class="nav-link text-sm font-medium text-slate-600 hover:text-brand-blue transition-colors">Services</a>
+                    <a href="#about" class="nav-link text-sm font-medium text-slate-600 hover:text-brand-blue transition-colors">About</a>
+                    <a href="#insights" class="nav-link text-sm font-medium text-slate-600 hover:text-brand-blue transition-colors">Insights</a>
+                    <a href="#contact" class="ml-4 px-5 py-2.5 bg-brand-orange text-white text-sm font-medium rounded-full hover:bg-brand-orangeDark transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                        Contact Us
+                    </a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-600 hover:text-brand-blue focus:outline-none">
+                        <i class="ph ph-list text-3xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-slate-100 absolute w-full shadow-xl">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#home" class="block px-3 py-3 text-base font-medium text-slate-600 hover:text-brand-blue hover:bg-slate-50 rounded-md">Home</a>
+                <a href="#services" class="block px-3 py-3 text-base font-medium text-slate-600 hover:text-brand-blue hover:bg-slate-50 rounded-md">Services</a>
+                <a href="#about" class="block px-3 py-3 text-base font-medium text-slate-600 hover:text-brand-blue hover:bg-slate-50 rounded-md">About</a>
+                <a href="#insights" class="block px-3 py-3 text-base font-medium text-slate-600 hover:text-brand-blue hover:bg-slate-50 rounded-md">Insights</a>
+                <a href="#contact" class="block px-3 py-3 text-base font-medium text-brand-orange font-bold">Contact Us</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECTION 1: Hero -->
+    <!-- SECTION 1: Hero -->
+<section id="home" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-white">
+    <div class="absolute top-0 right-0 -z-10 w-1/2 h-full bg-blue-50/50"></div>
+    <div class="absolute bottom-0 left-0 -z-10 w-96 h-96 bg-orange-50 rounded-full blur-3xl opacity-60 -translate-x-1/2 translate-y-1/2"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            
+            <!-- Left Content -->
+            <div class="reveal active">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 text-brand-orange text-xs font-semibold tracking-wide uppercase mb-6 border border-orange-100">
+                    <span class="w-2 h-2 rounded-full bg-brand-orange animate-pulse"></span>
+                    Financial Advisory & Strategy
+                </div>
+
+                <h1 class="text-5xl lg:text-6xl font-extrabold tracking-tight text-brand-blue leading-[1.1] mb-6">
+                    Financial Strateg for 
+                    <span class="text-gradient">Businesses & Teams</span>
+                </h1>
+
+                <p class="text-lg text-slate-600 mb-8 max-w-lg leading-relaxed">
+                    We help you grow your business, increase personal wealth, educate your employees, and publish your ideas.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#business-services" class="px-8 py-4 bg-brand-orange text-white rounded-lg font-semibold hover:bg-brand-orangeDark transition-all shadow-lg text-center">
+                        For Businesses
+                    </a>
+                    <a href="#individual-services" class="px-8 py-4 bg-white text-brand-blue border border-slate-200 rounded-lg font-semibold hover:bg-slate-50 transition-all text-center">
+                        For Individuals
+                    </a>
+                </div>
+
+                <p class="mt-6 text-sm text-slate-400">
+                    <a href="#publishing" class="underline hover:text-brand-accent transition-colors">
+                        Explore Publishing & Ghostwriting
+                    </a>
+                </p>
+            </div>
+
+            <!-- Right Image (Clean, No Overlays) -->
+            <div class="relative lg:h-[600px] flex items-center justify-center reveal delay-200">
+                <div class="relative w-full h-full max-h-[500px] bg-slate-200 rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+                    <img 
+                        src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                        alt="Meeting" 
+                        class="w-full h-full object-cover"
+                    >
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+    <!-- SECTION 2: Quick Service Grid -->
+    <section id="services" class="py-20 bg-brand-light relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h2 class="text-3xl font-bold text-brand-blue mb-4">Our Expertise</h2>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Cards -->
+                <a href="#" class="group p-8 rounded-2xl bg-white border border-slate-100 hover:border-brand-orange/50 hover:shadow-xl transition-all duration-300 reveal">
+                    <div class="w-14 h-14 bg-blue-100 text-brand-blue rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="ph-duotone ph-buildings text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-blue mb-3">Business Services</h3>
+                    <p class="text-sm text-slate-500 mb-4">Cash flow, data strategy, marketing & growth.</p>
+                    <span class="inline-flex items-center text-sm font-semibold text-brand-orange">Learn more <i class="ph-bold ph-arrow-right ml-1"></i></span>
+                </a>
+                <a href="#" class="group p-8 rounded-2xl bg-white border border-slate-100 hover:border-brand-orange/50 hover:shadow-xl transition-all duration-300 reveal delay-100">
+                    <div class="w-14 h-14 bg-orange-100 text-brand-orange rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="ph-duotone ph-user-circle text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-blue mb-3">Personal Services</h3>
+                    <p class="text-sm text-slate-500 mb-4">Wealth planning, budgeting, financial strategy.</p>
+                    <span class="inline-flex items-center text-sm font-semibold text-brand-orange">Learn more <i class="ph-bold ph-arrow-right ml-1"></i></span>
+                </a>
+                <a href="#" class="group p-8 rounded-2xl bg-white border border-slate-100 hover:border-brand-orange/50 hover:shadow-xl transition-all duration-300 reveal delay-200">
+                    <div class="w-14 h-14 bg-blue-100 text-brand-blue rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="ph-duotone ph-student text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-blue mb-3">Employee Education</h3>
+                    <p class="text-sm text-slate-500 mb-4">Workshops to reduce stress & increase productivity.</p>
+                    <span class="inline-flex items-center text-sm font-semibold text-brand-orange">Learn more <i class="ph-bold ph-arrow-right ml-1"></i></span>
+                </a>
+                <a href="#" class="group p-8 rounded-2xl bg-white border border-slate-100 hover:border-brand-orange/50 hover:shadow-xl transition-all duration-300 reveal delay-300">
+                    <div class="w-14 h-14 bg-orange-100 text-brand-orange rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i class="ph-duotone ph-book-open-text text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-blue mb-3">Publishing</h3>
+                    <p class="text-sm text-slate-500 mb-4">Books, curriculum & brand thought leadership.</p>
+                    <span class="inline-flex items-center text-sm font-semibold text-brand-orange">Learn more <i class="ph-bold ph-arrow-right ml-1"></i></span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+   
+    <!-- SECTION 3: Who We Help -->
+    <section class="py-20 bg-brand-blue text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(#FF6A00 1px, transparent 1px); background-size: 30px 30px;"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <h2 class="text-4xl md:text-4xl font-bold text-brand-orange tracking-wider uppercase mb-3">Who We Help</h2>
+                    <h3 class="text-sm md:text-2xl font-bold mb-6">We support business owners, individuals, and organizations.</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start"><i class="ph-fill ph-check-circle text-brand-orange mt-1 mr-3 text-xl"></i><span>Align business success with personal wealth</span></li>
+                        <li class="flex items-start"><i class="ph-fill ph-check-circle text-brand-orange mt-1 mr-3 text-xl"></i><span>Increase employee productivity</span></li>
+                        <li class="flex items-start"><i class="ph-fill ph-check-circle text-brand-orange mt-1 mr-3 text-xl"></i><span>Make data-driven decisions</span></li>
+                        <li class="flex items-start"><i class="ph-fill ph-check-circle text-brand-orange mt-1 mr-3 text-xl"></i><span>Turn expertise into published content</span></li>
+                    </ul>
+                </div>
+                <div class="relative reveal delay-200">
+                     <div class="absolute -inset-4 bg-gradient-to-r from-brand-orange to-brand-orangeDark rounded-2xl blur-lg opacity-10"></div>
+                    <img src="images/About us Encuentrofinanciero.png">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+     <!-- SECTION 4: SOCIAL PROOF / CREDIBILITY (ADDED) -->
+    <section id="social-proof" class="py-16 bg-white border-y border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Media Logos -->
+            <div class="mb-16 text-center reveal">
+                <p class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-8">Trusted By Industry Leaders & Media</p>
+                <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+                    <!-- Placeholder Logos using Text/Icons -->
+                    <div class="flex items-center gap-2 text-2xl font-serif font-bold text-brand-blue"><i class="ph-fill ph-television text-brand-orange"></i> Univision</div>
+                    <div class="flex items-center gap-2 text-2xl font-sans font-bold text-brand-blue">FORBES</div>
+                    <div class="flex items-center gap-2 text-2xl font-serif font-bold text-brand-blue"><i class="ph-fill ph-microphone-stage text-brand-orange"></i> NPR</div>
+                    <div class="flex items-center gap-2 text-2xl font-mono font-bold text-brand-blue">TECH<span class="text-brand-orange">CRUNCH</span></div>
+                </div>
+            </div>
+
+            <!-- Testimonials Grid -->
+            <div class="grid md:grid-cols-3 gap-8 reveal">
+                <!-- Testimonial 1 -->
+                <div class="bg-slate-50 p-8 rounded-2xl relative">
+                    <i class="ph-fill ph-quotes text-4xl text-brand-orange/20 absolute top-6 right-6"></i>
+                    <p class="text-slate-600 mb-6 relative z-10">"Encuentro Financiero transformed how we handle cash flow. The strategies were clear, actionable, and effective."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-slate-300 rounded-full overflow-hidden">
+                             <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <div class="font-bold text-brand-blue">Maria Gonzalez</div>
+                            <div class="text-xs text-slate-500">CEO, TechStart Inc.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="bg-slate-50 p-8 rounded-2xl relative">
+                    <i class="ph-fill ph-quotes text-4xl text-brand-orange/20 absolute top-6 right-6"></i>
+                    <p class="text-slate-600 mb-6 relative z-10">"The employee workshops were a game changer. Our team is less stressed and more focused."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-slate-300 rounded-full overflow-hidden">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <div class="font-bold text-brand-blue">James Wilson</div>
+                            <div class="text-xs text-slate-500">HR Director, Global Corp</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="bg-slate-50 p-8 rounded-2xl relative">
+                    <i class="ph-fill ph-quotes text-4xl text-brand-orange/20 absolute top-6 right-6"></i>
+                    <p class="text-slate-600 mb-6 relative z-10">"Finally published my book thanks to their ghostwriting team. Highly professional."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-slate-300 rounded-full overflow-hidden">
+                             <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="User" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <div class="font-bold text-brand-blue">Elena Rodriguez</div>
+                            <div class="text-xs text-slate-500">Author & Consultant</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <!-- SECTION 5 & 6: Featured Services & Publishing -->
+    <section id="business-services" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="text-brand-accent font-semibold tracking-wider uppercase text-sm">Our Approach</span>
+                <h2 class="text-3xl font-bold text-brand-dark mt-2">Featured Services</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Col 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow reveal">
+                    <div class="w-12 h-12 bg-blue-600 text-white rounded-lg flex items-center justify-center mb-6">
+                        <i class="ph-bold ph-chart-bar text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-dark mb-4">Business Strategy</h3>
+                    <ul class="space-y-3 text-slate-600 mb-6">
+                        <li class="flex items-center"><i class="ph-fill ph-dot text-brand-accent mr-2"></i> Cash Flow Optimization</li>
+                        <li class="flex items-center"><i class="ph-fill ph-dot text-brand-accent mr-2"></i> Data Analysis & Dashboards</li>
+                        <li class="flex items-center"><i class="ph-fill ph-dot text-brand-accent mr-2"></i> Strategic Marketing Systems</li>
+                    </ul>
+                    <a href="#" class="text-brand-dark font-semibold hover:text-brand-accent text-sm">Learn More &rarr;</a>
+                </div>
+
+                <!-- Col 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow reveal delay-100">
+                    <div class="w-12 h-12 bg-green-600 text-white rounded-lg flex items-center justify-center mb-6">
+                        <i class="ph-bold ph-wallet text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-dark mb-4">Personal Finance</h3>
+                    <ul class="space-y-3 text-slate-600 mb-6">
+                        <li class="flex items-center"><i class="ph-fill ph-dot text-brand-accent mr-2"></i> Budgeting & Wealth Planning</li>
+                        <li class="flex items-center"><i class="ph-fill ph-dot text-brand-accent mr-2"></i> Financial Counseling</li>
+                        <li class="flex items-center"><i class="ph-fill ph-dot text-brand-accent mr-2"></i> Independence Roadmapping</li>
+                    </ul>
+                    <a href="#" class="text-brand-dark font-semibold hover:text-brand-accent text-sm">Learn More &rarr;</a>
+                </div>
+
+                <!-- Col 3 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow reveal delay-200">
+                    <div class="w-12 h-12 bg-purple-600 text-white rounded-lg flex items-center justify-center mb-6">
+                        <i class="ph-bold ph-presentation-chart text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-dark mb-4">Employee Education</h3>
+                    <ul class="space-y-3 text-slate-600 mb-6">
+                        <li class="flex items-center"><i class="ph-fill ph-dot text-brand-accent mr-2"></i> On-site Workshops</li>
+                        <li class="flex items-center"><i class="ph-fill ph-dot text-brand-accent mr-2"></i> Virtual Programs</li>
+                        <li class="flex items-center"><i class="ph-fill ph-dot text-brand-accent mr-2"></i> Spanish & English Delivery</li>
+                    </ul>
+                    <a href="#" class="text-brand-dark font-semibold hover:text-brand-accent text-sm">Learn More &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- SECTION 7: Insights Preview -->
+    <section id="insights" class="py-20 bg-brand-light border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-end mb-12 reveal">
+                <div>
+                    <h2 class="text-3xl font-bold text-brand-dark">Insights & Community</h2>
+                    <p class="text-slate-600 mt-2">Latest thoughts on finance and strategy.</p>
+                </div>
+                <a href="#" class="hidden md:inline-flex items-center font-semibold text-brand-dark hover:text-brand-accent">
+                    View All Insights <i class="ph-bold ph-arrow-right ml-1"></i>
+                </a>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Post 1 -->
+                <article class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all group reveal">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Chart" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-blue-600 uppercase tracking-wide">Business Strategy</span>
+                        <h3 class="text-xl font-bold text-brand-dark mt-2 mb-3 group-hover:text-brand-accent transition-colors">5 Cash Flow Metrics Every Owner Should Track</h3>
+                        <p class="text-slate-500 text-sm mb-4">Understanding liquidity is key to survival. Here are the metrics that matter.</p>
+                        <a href="#" class="text-sm font-semibold text-brand-dark underline decoration-brand-accent/50 hover:decoration-brand-accent underline-offset-4">Read More</a>
+                    </div>
+                </article>
+
+                <!-- Post 2 -->
+                <article class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all group reveal delay-100">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Coins" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-green-600 uppercase tracking-wide">Personal Finance</span>
+                        <h3 class="text-xl font-bold text-brand-dark mt-2 mb-3 group-hover:text-brand-accent transition-colors">The Psychology of Saving in Volatile Times</h3>
+                        <p class="text-slate-500 text-sm mb-4">How behavioral finance can help you stick to your budget when anxiety is high.</p>
+                        <a href="#" class="text-sm font-semibold text-brand-dark underline decoration-brand-accent/50 hover:decoration-brand-accent underline-offset-4">Read More</a>
+                    </div>
+                </article>
+
+                <!-- Post 3 -->
+                <article class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all group reveal delay-200">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Meeting" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-purple-600 uppercase tracking-wide">Publishing</span>
+                        <h3 class="text-xl font-bold text-brand-dark mt-2 mb-3 group-hover:text-brand-accent transition-colors">Why Your Business Book Needs a Strategy</h3>
+                        <p class="text-slate-500 text-sm mb-4">Writing is only half the battle. The distribution plan determines your ROI.</p>
+                        <a href="#" class="text-sm font-semibold text-brand-dark underline decoration-brand-accent/50 hover:decoration-brand-accent underline-offset-4">Read More</a>
+                    </div>
+                </article>
+            </div>
+            
+            <div class="mt-8 text-center md:hidden">
+                <a href="#" class="inline-flex items-center font-semibold text-brand-dark hover:text-brand-accent">
+                    View All Insights <i class="ph-bold ph-arrow-right ml-1"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- SECTION 8: ABOUT PREVIEW (ADDED) -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center reveal">
+                <div class="order-2 md:order-1">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                        <img src="images/Encuentro-Financiero-Logo-3.png" alt="About Us" class="w-full h-auto object-cover">
+                        <!-- Badge overlay
+                        <div class="absolute bottom-6 left-6 bg-white/90 backdrop-blur px-4 py-2 rounded-lg shadow-lg border-l-4 border-brand-orange">
+                            <p class="text-xs font-bold text-brand-blue uppercase">Established 2010</p>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="order-1 md:order-2">
+                    <h2 class="text-3xl md:text-4xl font-bold text-brand-blue mb-6">About Us</h2>
+                    <p class="text-lg text-slate-600 mb-6 leading-relaxed">
+                        We are a financial education & strategic advisory firm helping business owners, families, and organizations take control of their finances and build lasting success. Through data-driven strategy, financial literacy, and publishing support, we help our clients create wealth and legacy.
+                    </p>
+                    <a href="#" class="inline-flex items-center px-6 py-3 bg-brand-blue text-white font-bold rounded-lg hover:bg-brand-blueLight transition-colors">
+                        Learn More About Us <i class="ph-bold ph-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION: Publishing (Updated Unified Version) -->
+<section id="publishing" class="py-24 bg-white overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-brand-blue rounded-3xl p-8 md:p-16 relative overflow-hidden">
+            
+            <!-- Background Glow -->
+            <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-orange/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3"></div>
+
+            <div class="relative z-10 grid md:grid-cols-2 gap-12 items-center">
+                
+                <!-- Content -->
+                <div class="reveal">
+                    <div class="inline-block px-3 py-1 bg-brand-orange text-white text-xs font-bold rounded-full mb-4">
+                        GHOSTWRITING
+                    </div>
+
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+                        Turn Your Ideas Into a Book That Positions You as a Leader
+                    </h2>
+
+                    <p class="text-slate-300 text-lg mb-8">
+                        We help entrepreneurs, professionals, and educators develop and publish books that increase credibility, create influence, and build legacy.
+                    </p>
+
+                    <a href="#"
+                       class="inline-flex items-center px-6 py-3 bg-brand-orange text-white font-bold rounded-lg hover:bg-brand-orangeDark transition-colors">
+                        See Publishing Services
+                        <i class="ph-bold ph-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Book Mockups -->
+                <div class="relative reveal delay-200">
+                    <div class="flex justify-center items-end gap-4 perspective-1000">
+                        
+                        <div class="w-32 h-48 bg-slate-700 rounded shadow-xl transform -rotate-6 translate-y-4 border-l-4 border-slate-600"></div>
+
+                        <div class="w-36 h-52 bg-brand-orange rounded shadow-2xl z-10 flex items-center justify-center text-center p-4 border-l-4 border-brand-orangeDark">
+                            <div>
+                                <div class="text-[10px] uppercase tracking-widest text-white/70">
+                                    New Release
+                                </div>
+                                <div class="font-serif font-bold text-white text-lg leading-tight mt-1">
+                                    My Money One + One
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-32 h-48 bg-slate-700 rounded shadow-xl transform rotate-6 translate-y-4 border-l-4 border-slate-600"></div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+    <!-- Contact -->
+    <section id="contact" class="py-20 bg-slate-50">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
+            <h2 class="text-3xl md:text-4xl font-bold text-brand-blue mb-4">Ready to Get Started?</h2>
+            <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-lg text-left mt-8">
+                <form onsubmit="event.preventDefault(); alert('Thank you!');" class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-brand-blue mb-2">Name</label>
+                            <input type="text" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/20 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-brand-blue mb-2">Email</label>
+                            <input type="email" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/20 outline-none">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-brand-blue mb-2">I need help with...</label>
+                        <select class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/20 outline-none">
+                            <option>Business Services</option>
+                            <option>Personal Services</option>
+                            <option>Publishing</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-brand-blue mb-2">Message</label>
+                        <textarea rows="4" class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/20 outline-none"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-4 bg-brand-orange text-white font-bold rounded-lg hover:bg-brand-orangeDark transition-colors shadow-lg">
+                        Book a Consultation
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-blue-dark text-slate-400 py-12 border-t border-brand-blue">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div class="col-span-1 md:col-span-2">
+         <!-- Logo -->
+<div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+    <img 
+        src="images\Encuentro-Financiero-Logo-3.png" 
+        alt="Encuentro Financiero Logo" 
+        class="h-16 w-auto object-contain"
+    >
+</div>
+                    <p class="text-sm max-w-xs">Strategic advisory firm helping businesses and families build wealth.</p>
+                </div>
+                <div>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#home" class="hover:text-brand-orange transition-colors">Home</a></li>
+                        <li><a href="#about" class="hover:text-brand-orange transition-colors">About</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-brand-orange transition-colors">Privacy</a></li>
+                        <li><a href="#contact" class="hover:text-brand-orange transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-brand-blue pt-8 text-center text-xs">
+                <p>&copy; 2026 Encuentro Financiero. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => { menu.classList.toggle('hidden'); });
+
+        // Scroll Reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => { observer.observe(el); });
+    </script>
+</body>
+</html>
